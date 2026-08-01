@@ -1,0 +1,45 @@
+generated: '2026-08-01'
+method: searched
+source: https://www.cardless.com/platform
+docs: https://www.cardless.com/platform
+description: 'Cardless ships pre-built, customizable client-side components alongside
+  its partner API so a brand can embed the credit-card journey natively in its own app
+  or website. Partners can use the APIs, the components, or both. The component surface
+  is described publicly on the platform page; the integration reference for each
+  component is behind the partner login at docs.cardless.com.'
+families:
+- family: Application
+  components:
+  - name: Application flow
+    description: 'Onboard users with identity verification, eligibility checks and
+      real-time decisioning inside the partner experience.'
+  - name: Approvals
+    description: 'Application processing and approval surfaced within the partner
+      user experience.'
+- family: Checkout
+  components:
+  - name: Checkout integration
+    description: 'Let customers apply for credit during a purchase and receive an
+      instant virtual card on approval.'
+- family: Servicing
+  components:
+  - name: Card management
+    description: 'Card activation, settings changes and support access embedded
+      directly in the partner app or website.'
+  - name: Transaction disputes
+    description: 'Customers report and track dispute requests without leaving the
+      partner application.'
+- family: Rewards
+  components:
+  - name: Rewards
+    description: 'Points and incentive management, including spend-and-earn tracking
+      inside the partner application.'
+loader_libraries: []
+notes:
+- 'No public npm/CDN loader library or embed snippet is published; the component
+  bundles are distributed through partner onboarding. No packages/ artifact written
+  because no first-party client library was found in any public registry.'
+x-evidence:
+  fetched: '2026-08-01'
+  url: https://www.cardless.com/platform
+  http_status: 200

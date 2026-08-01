@@ -1,0 +1,57 @@
+generated: '2026-08-01'
+method: derived
+source: 'authentication/cardless-authentication.yml + live probes of api.cardless.com and docs.cardless.com'
+x-docs-access: partner-gated
+authentication:
+  style: bearer-token
+  obtain: 'HTTP Basic to the partner token endpoint, exchanging a partner-signed JWT
+    for a bearer access token (grant_type=partner) or refreshing it (grant_type=refresh_token).'
+  token_type: bearer
+  token_lifetime_seconds: 3599
+  refresh: true
+  authorization_model: 'Account-scoped: the token response enumerates the account
+    identifiers the partner user is allowed to act on. There is no OAuth scope string
+    beyond the fixed value "partner".'
+  reference: authentication/cardless-authentication.yml
+identifiers:
+  style: uuid
+  note: 'Cardless user and account identifiers are UUIDv4 (observed in the published
+    examples of the partner token response). No prefixed-id convention observed.'
+media_type: application/json
+idempotency:
+  supported: unknown
+  note: 'No idempotency key header, parameter or policy is documented on any public
+    Cardless surface. Not asserted — no Idempotency pointer is emitted.'
+pagination:
+  style: unknown
+  note: 'No pagination convention is published publicly.'
+versioning:
+  scheme: unknown
+  note: 'No public versioning policy. The partner authentication contract carries
+    info.version 1.0.0 and the token path is /oauth/token (unversioned).'
+  reference: lifecycle/cardless-lifecycle.yml
+error_envelope:
+  observed: '{"message": "<string>"}'
+  source: 'live 401 response from https://api.cardless.com/ on 2026-08-01'
+  rfc9457: false
+  note: 'The gateway-level error envelope is a single message field, not RFC 9457
+    application/problem+json. The application-level error catalog is behind the
+    partner login and was not harvested.'
+rate_limiting:
+  documented: false
+  headers_observed: []
+environments:
+  production:
+    api_host: https://api.cardless.com/
+    evidence: 'HTTP 401 {"message":"Unauthorized"} on every path — live but fully gated.'
+  staging:
+    auth_host: https://auth.cardless-staging.com/
+    evidence: 'Declared as the server in the partner authentication contract; a separate
+      staging estate exists on the cardless-staging.com domain.'
+    note: 'No public sandbox credentials or magic test values are published, so no
+      sandbox/ artifact was written.'
+webhooks:
+  documented: false
+  note: 'No public evidence of a webhook or event surface; no asyncapi/ artifact written.'
+x-evidence:
+  fetched: '2026-08-01'

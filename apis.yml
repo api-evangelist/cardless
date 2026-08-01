@@ -1,18 +1,87 @@
 aid: cardless
 name: Cardless
-description: 'Cardless is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Cardless, Inc. is a San Francisco fintech that operates an embedded co-branded
+  credit card platform, letting consumer brands launch and run their own credit card
+  programs natively inside their own apps and websites. The platform pairs a partner
+  API surface with pre-built components covering the full credit journey — application
+  and identity verification, real-time decisioning, checkout with instant virtual cards,
+  card management and transaction disputes — while Cardless handles issuing-bank relationships,
+  card production, underwriting, fraud, KYC/AML compliance, servicing and support behind
+  the scenes. It is network-agnostic across Visa, Mastercard and American Express. Named
+  partners include Coinbase (Coinbase One Card), Bilt, Qatar Airways Privilege Club,
+  Alibaba.com, LATAM Airlines, Avianca LifeMiles, TAP Air Portugal and Avelo Airlines.
+  Developer documentation at docs.cardless.com is gated behind a partner login, so no
+  public OpenAPI, SDKs or sandbox credentials are published.'
 url: https://raw.githubusercontent.com/api-evangelist/cardless/refs/heads/main/apis.yml
+image: https://framerusercontent.com/images/hm4RTByVdin3oyQTHY2rMm9doQ.jpg
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-secondary-market-listing: https://forgeglobal.com/cardless_stock/
+x-tier: profiled
+x-tier-reason: enrichment-pipeline
 specificationVersion: '0.20'
 created: '2026-08-01'
 modified: '2026-08-01'
+x-enrichment:
+  date: '2026-08-01'
+  status: enriched
+  artifacts_added: 13
+  pass: local-v1
 tags:
 - Company
-apis: []
+- Financial Services
+- Fintech
+- Credit Cards
+- Card Issuing
+- Embedded Finance
+- Payments
+- Banking as a Service
+- Lending
+- Co-Branded Cards
+- Loyalty
+apis:
+- aid: cardless:partner-api
+  name: Cardless Partner API
+  description: 'The Cardless partner API surface used by brands to embed a co-branded
+    credit card program: partner authentication (Basic-auth exchange of a partner-signed
+    JWT for a bearer access token), application submission and decisioning, account
+    servicing, payments, transactions and disputes. Documentation and the OpenAPI
+    fragments that back it are gated behind a partner login at docs.cardless.com;
+    the production API host answers unauthenticated requests with HTTP 401.'
+  humanURL: https://docs.cardless.com/
+  baseURL: https://api.cardless.com/
+  tags:
+  - Credit Cards
+  - Card Issuing
+  - Embedded Finance
+  - Payments
+  properties:
+  - type: Documentation
+    url: https://docs.cardless.com/
+  - type: Authentication
+    url: authentication/cardless-authentication.yml
+  - type: Conventions
+    url: conventions/cardless-conventions.yml
+- aid: cardless:docs-mcp
+  name: Cardless Docs MCP Server
+  description: 'A remote Model Context Protocol server published by Cardless at docs.cardless.com/mcp
+    (Mintlify-hosted). It answers tools/list anonymously and exposes three read-oriented
+    tools over the Cardless documentation corpus — documentation search, a read-only
+    virtualized documentation filesystem, and docs feedback submission. It also advertises
+    OAuth 2.0 authorization-server and protected-resource metadata with a single mcp:search
+    scope. This is a documentation-search MCP server, not an MCP projection of the
+    Cardless partner API.'
+  humanURL: https://docs.cardless.com/
+  baseURL: https://docs.cardless.com/mcp
+  tags:
+  - MCP
+  - Documentation
+  - Agents
+  properties:
+  - type: MCPServer
+    url: mcp/cardless-mcp.yml
+  - type: OAuthScopes
+    url: scopes/cardless-scopes.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -20,4 +89,42 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://forgeglobal.com/cardless_stock/
+  url: https://www.cardless.com/
+- type: DeveloperPortal
+  url: https://docs.cardless.com/
+- type: Documentation
+  url: https://docs.cardless.com/
+- type: Blog
+  url: https://www.cardless.com/blog
+- type: Support
+  url: https://www.cardless.com/help
+- type: SignUp
+  url: https://app.cardless.com/login
+- type: TermsOfService
+  url: https://legal.cardless.com/terms_of_service/default/terms_of_service.pdf
+- type: PrivacyPolicy
+  url: https://legal.cardless.com/privacy_policy/default/privacy_policy.pdf
+- type: Customers
+  url: https://www.cardless.com/customers
+- type: Careers
+  url: https://www.cardless.com/careers
+- type: MCPServer
+  url: mcp/cardless-mcp.yml
+- type: WellKnown
+  url: well-known/cardless-well-known.yml
+- type: OAuthScopes
+  url: scopes/cardless-scopes.yml
+- type: Authentication
+  url: authentication/cardless-authentication.yml
+- type: Conventions
+  url: conventions/cardless-conventions.yml
+- type: Conformance
+  url: conformance/cardless-conformance.yml
+- type: Lifecycle
+  url: lifecycle/cardless-lifecycle.yml
+- type: Components
+  url: components/cardless-components.yml
+- type: DomainSecurity
+  url: security/cardless-domain-security.yml
+- type: LLMsTxt
+  url: llms/cardless-llms.txt

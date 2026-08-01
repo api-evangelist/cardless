@@ -1,0 +1,32 @@
+generated: '2026-08-01'
+method: probed
+source: 'live probes of cardless.com, docs.cardless.com, api.cardless.com and status subdomains'
+versioning:
+  scheme: unknown
+  current: null
+  docs: null
+  note: 'No public versioning policy. The partner token path is unversioned (/oauth/token)
+    and the partner authentication contract declares info.version 1.0.0.'
+deprecation:
+  policy_url: null
+  sunset_header: unknown
+  note: 'No deprecation or sunset policy published on any public Cardless surface.
+    No Deprecation pointer emitted.'
+sla:
+  url: null
+  uptime_target: null
+status_page:
+  url: null
+  public: false
+  candidates_probed:
+  - {url: 'https://status.cardless.com/', result: 'DNS does not resolve'}
+  - {url: 'https://cardless.statuspage.io/', result: 'redirects to Google SAML SSO — private, employee/partner-only'}
+  note: 'A Statuspage instance exists at cardless.statuspage.io but is SSO-gated, so
+    there is no publicly readable status page. No StatusPage pointer emitted.'
+changelog:
+  url: null
+  note: 'No public dated changelog or release notes. /changelog returns 404; the docs
+    changelog, if any, is behind the partner login.'
+deprecated_operations: []
+x-evidence:
+  fetched: '2026-08-01'

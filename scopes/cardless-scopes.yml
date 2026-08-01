@@ -1,0 +1,35 @@
+generated: '2026-08-01'
+method: searched
+source: https://docs.cardless.com/.well-known/oauth-authorization-server
+docs: null
+note: 'The only OAuth scope surface Cardless publishes anonymously belongs to the
+  documentation MCP server at docs.cardless.com/mcp, not to the partner API. The
+  partner API''s own token response reports a fixed scope value of "partner" (see
+  authentication/cardless-authentication.yml); it is not a delegated-consent scope
+  system and Cardless publishes no scope reference page.'
+schemes:
+- name: Cardless Docs MCP OAuth
+  source: well-known/cardless-oauth-authorization-server.json
+  issuer: https://docs.cardless.com/mcp/oauth
+  protected_resource: https://docs.cardless.com
+  registration_endpoint: https://docs.cardless.com/mcp/oauth/register
+  dynamic_client_registration: true
+  code_challenge_methods: [S256]
+  token_endpoint_auth_methods: [none, client_secret_post, client_secret_basic]
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://docs.cardless.com/mcp/oauth/authorize
+    tokenUrl: https://docs.cardless.com/mcp/oauth/token
+  - flow: clientCredentials
+    tokenUrl: https://docs.cardless.com/mcp/oauth/token
+  - flow: refreshToken
+    tokenUrl: https://docs.cardless.com/mcp/oauth/token
+scopes:
+- scope: mcp:search
+  description: Search and read the Cardless documentation corpus through the MCP server.
+  flows: [authorizationCode, clientCredentials]
+  sources: [well-known/cardless-oauth-authorization-server.json]
+x-evidence:
+  fetched: '2026-08-01'
+  url: https://docs.cardless.com/.well-known/oauth-authorization-server
+  http_status: 200

@@ -1,0 +1,6 @@
+{
+    "resource": "https://docs.cardless.com",
+    "authorization_servers": [
+        "https://docs.cardless.com/mcp/oauth"
+    ]
+}

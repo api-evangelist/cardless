@@ -1,0 +1,61 @@
+generated: '2026-08-01'
+method: searched
+source: 'docs.cardless.com partner authentication reference (partner-gated) + https://docs.cardless.com/.well-known/oauth-authorization-server'
+docs: https://docs.cardless.com/
+x-docs-access: partner-gated
+summary:
+  types: [http, oauth2]
+  http_schemes: [basic, bearer]
+  oauth2_flows: [authorizationCode, clientCredentials, refreshToken]
+  api_key_in: []
+  delegated_consent: false
+schemes:
+- name: partnerBasicAuth
+  type: http
+  scheme: basic
+  applies_to: cardless:partner-api
+  description: 'Partner token exchange is protected with HTTP Basic authentication.
+    The username is a fixed partner client identifier; the password is issued to the
+    partner during onboarding. Credentials are not self-service — there is no public
+    sign-up for API credentials.'
+  sources: ['docs.cardless.com partner authentication reference']
+- name: partnerBearerToken
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  applies_to: cardless:partner-api
+  description: 'All servicing requests carry a bearer access token obtained from the
+    partner token endpoint. The token grant is partner-scoped: the partner presents a
+    JWT signed with its own partner key together with the partner user identifier, and
+    receives a short-lived access token plus a refresh token. The token response also
+    returns the Cardless user identifier and the list of account identifiers the partner
+    user may act on, so authorization is account-scoped rather than scope-string-scoped.'
+  grant_types: [partner, refresh_token]
+  token_lifetime_seconds: 3599
+  sources: ['docs.cardless.com partner authentication reference']
+- name: docsMcpOAuth
+  type: oauth2
+  applies_to: cardless:docs-mcp
+  description: 'OAuth 2.0 for the documentation MCP server, advertised via RFC 8414
+    authorization-server metadata and RFC 9728 protected-resource metadata. Supports
+    dynamic client registration (RFC 7591) and PKCE S256. One scope: mcp:search.
+    tools/list and tools/call are currently answered anonymously as well.'
+  issuer: https://docs.cardless.com/mcp/oauth
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://docs.cardless.com/mcp/oauth/authorize
+    tokenUrl: https://docs.cardless.com/mcp/oauth/token
+    scopes: [mcp:search]
+  - flow: clientCredentials
+    tokenUrl: https://docs.cardless.com/mcp/oauth/token
+    scopes: [mcp:search]
+  sources: [well-known/cardless-oauth-authorization-server.json]
+notes:
+- 'No public API keys, no self-service credential issuance, no public sandbox credentials.
+  Cardless is a partner-onboarded platform: API access is granted through a commercial
+  onboarding process.'
+- 'No OpenAPI document is published on any public Cardless host; the specification
+  fragments that back the documentation are behind the partner login.'
+x-evidence:
+  fetched: '2026-08-01'
+  hosts_probed: [api.cardless.com, docs.cardless.com, www.cardless.com]

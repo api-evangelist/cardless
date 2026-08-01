@@ -1,0 +1,67 @@
+generated: '2026-08-01'
+method: derived
+source: 'well-known/cardless-oauth-authorization-server.json + well-known/cardless-oauth-protected-resource.json + mcp/cardless-mcp-tools-list.json + authentication/cardless-authentication.yml'
+standards:
+- id: oauth2
+  conforms: true
+  evidence: 'RFC 6749 authorization_code, client_credentials and refresh_token grants
+    advertised by the docs MCP authorization server; the partner API issues bearer
+    access tokens with refresh tokens from an /oauth/token endpoint.'
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: true
+  evidence: 'https://docs.cardless.com/.well-known/oauth-authorization-server returns 200 JSON.'
+- id: rfc9728-oauth-protected-resource-metadata
+  conforms: true
+  evidence: 'https://docs.cardless.com/.well-known/oauth-protected-resource returns 200 JSON.'
+- id: rfc7636-pkce
+  conforms: true
+  evidence: 'code_challenge_methods_supported: [S256].'
+- id: rfc7591-dynamic-client-registration
+  conforms: true
+  evidence: 'registration_endpoint: https://docs.cardless.com/mcp/oauth/register.'
+- id: rfc7519-jwt
+  conforms: true
+  evidence: 'Partner grant presents a partner-signed JWT; access and refresh tokens
+    are JWTs.'
+- id: mcp
+  conforms: true
+  version: '2025-06-18'
+  evidence: 'Streamable-HTTP MCP server at https://docs.cardless.com/mcp; initialize
+    returns protocolVersion 2025-06-18 and serverInfo "Cardless Docs" 1.0.0.'
+- id: openapi
+  conforms: partial
+  evidence: 'OpenAPI 3.0.0 fragments back the partner reference documentation, but no
+    OpenAPI document is served from any public Cardless host — the specification is
+    behind the partner login at docs.cardless.com.'
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: 'Observed gateway error envelope is {"message": "..."} with content-type
+    application/json, not application/problem+json.'
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: '/.well-known/security.txt returns 404 on www.cardless.com and is not
+    served on docs.cardless.com or api.cardless.com.'
+- id: rfc9727-api-catalog
+  conforms: false
+  evidence: '/.well-known/api-catalog returns 404/401 on all hosts.'
+- id: oidc
+  conforms: false
+  evidence: 'No /.well-known/openid-configuration is served on any Cardless host.'
+- id: a2a
+  conforms: false
+  evidence: 'No A2A Agent Card at /.well-known/agent-card.json or /.well-known/agent.json
+    on any host.'
+- id: asyncapi
+  conforms: false
+  evidence: 'No published event, streaming or webhook surface.'
+- id: pci-dss
+  conforms: unknown
+  evidence: 'Cardless is a card-issuing platform and works with issuing banks, so a
+    card-data compliance program is implied, but Cardless publishes no trust center,
+    compliance page or named certification. Not asserted.'
+notes:
+- 'No Compliance pointer is emitted: Cardless publishes no certification, trust center
+  or compliance program page (probed /security, /trust, /compliance, trust.cardless.com,
+  security.cardless.com — all 404 or unresolvable).'
+x-evidence:
+  fetched: '2026-08-01'

@@ -1,0 +1,85 @@
+generated: '2026-08-01'
+method: probed
+source: 'live GET of /.well-known/* on every Cardless host known to the catalog'
+hosts:
+- host: https://docs.cardless.com
+  documents:
+  - path: /.well-known/oauth-authorization-server
+    standard: RFC 8414
+    status: 200
+    content_type: application/json
+    file: cardless-oauth-authorization-server.json
+  - path: /.well-known/oauth-protected-resource
+    standard: RFC 9728
+    status: 200
+    content_type: application/json
+    file: cardless-oauth-protected-resource.json
+  - path: /.well-known/api-catalog
+    standard: RFC 9727
+    status: 404
+  - path: /.well-known/security.txt
+    standard: RFC 9116
+    status: 200
+    note: 'HTML shell — the docs site is a single-page app that answers 200 with the
+      login page for unmatched /.well-known/* paths. NOT a security.txt.'
+    accepted: false
+  - path: /.well-known/openid-configuration
+    status: 200
+    note: 'HTML shell (SPA catch-all), not OIDC discovery.'
+    accepted: false
+  - path: /.well-known/agent-card.json
+    status: 200
+    note: 'HTML shell (SPA catch-all), not an A2A Agent Card.'
+    accepted: false
+  - path: /.well-known/agent.json
+    status: 200
+    note: 'HTML shell (SPA catch-all), not an A2A Agent Card.'
+    accepted: false
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    note: 'HTML shell (SPA catch-all).'
+    accepted: false
+- host: https://api.cardless.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 401
+  - path: /.well-known/openid-configuration
+    status: 401
+  - path: /.well-known/oauth-authorization-server
+    status: 401
+  - path: /.well-known/oauth-protected-resource
+    status: 401
+  - path: /.well-known/api-catalog
+    status: 401
+  - path: /.well-known/ai-plugin.json
+    status: 401
+  - path: /.well-known/agent-card.json
+    status: 401
+  - path: /.well-known/agent.json
+    status: 401
+  note: 'Every path on api.cardless.com returns 401 {"message":"Unauthorized"}; the
+    host is live but nothing is served anonymously.'
+- host: https://www.cardless.com
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+summary:
+  accepted_documents: 2
+  security_txt: false
+  api_catalog: false
+  agent_card: false
+  openid_configuration: false
+x-evidence:
+  fetched: '2026-08-01'
