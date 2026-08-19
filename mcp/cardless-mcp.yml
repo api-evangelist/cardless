@@ -10,58 +10,77 @@ server:
   protocol_version: '2025-06-18'
   vendor: Mintlify (documentation-platform hosted MCP)
   kind: documentation-search
-  note: 'This is a documentation-search MCP server published on the Cardless docs host.
-    It is NOT an MCP projection of the Cardless partner API — none of its tools call
-    a Cardless product endpoint. No first-party product MCP server was found.'
+  note: This is a documentation-search MCP server published on the Cardless docs host. It is NOT an MCP
+    projection of the Cardless partner API — none of its tools call a Cardless product endpoint. No first-party
+    product MCP server was found.
 capabilities:
   tools:
     listChanged: true
   resources: {}
 authentication:
   anonymous_tools_list: true
-  note: 'tools/list and tools/call answered HTTP 200 with no credentials on 2026-08-01.
-    The server also advertises OAuth 2.0 metadata (see well-known/) for authenticated
-    sessions.'
+  note: tools/list and tools/call answered HTTP 200 with no credentials on 2026-08-01. The server also
+    advertises OAuth 2.0 metadata (see well-known/) for authenticated sessions.
   oauth:
     authorization_server: https://docs.cardless.com/mcp/oauth
     protected_resource: https://docs.cardless.com
-    scopes: [mcp:search]
+    scopes:
+    - mcp:search
 tools:
 - name: search_cardless_docs
   title: Search documentation
-  description: Search the Cardless Docs knowledge base for documentation, code examples,
-    API references and guides; returns contextual content with titles and links.
-  input: {query: string}
-  annotations: {readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false}
+  description: Search the Cardless Docs knowledge base for documentation, code examples, API references
+    and guides; returns contextual content with titles and links.
+  input:
+    query: string
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+    openWorldHint: false
 - name: query_docs_filesystem_cardless_docs
-  description: Run read-only shell-like queries (rg, grep, find, tree, ls, cat, head,
-    tail, jq, ...) against a virtualized in-memory filesystem containing the Cardless
-    documentation pages and OpenAPI specs.
-  input: {command: string}
-  annotations: {readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false}
+  description: Run read-only shell-like queries (rg, grep, find, tree, ls, cat, head, tail, jq, ...) against
+    a virtualized in-memory filesystem containing the Cardless documentation pages and OpenAPI specs.
+  input:
+    command: string
+  annotations:
+    readOnlyHint: true
+    destructiveHint: false
+    idempotentHint: true
+    openWorldHint: false
 - name: submit_feedback
   title: Submit documentation feedback
   description: Report a problem with a Cardless documentation page to the docs team.
-  input: {path: string, feedback: string}
-  annotations: {readOnlyHint: false, destructiveHint: false, idempotentHint: false, openWorldHint: true}
+  input:
+    path: string
+    feedback: string
+  annotations:
+    readOnlyHint: false
+    destructiveHint: false
+    idempotentHint: false
+    openWorldHint: true
 files:
   tools_list: cardless-mcp-tools-list.json
 x-evidence:
   fetched: '2026-08-01'
   url: https://docs.cardless.com/mcp
-  method: 'POST jsonrpc tools/list + initialize'
+  method: POST jsonrpc tools/list + initialize
   http_status: 200
   content_type: text/event-stream
 x-observation:
-  summary: 'Documentation corpus is partner-login-gated in the browser but readable
-    anonymously through this MCP endpoint.'
-  detail: 'Every HTML path on docs.cardless.com redirects to /login?redirect=... , and
-    docs.cardless.com/sitemap.xml is empty — the documentation is deliberately gated to
-    partners. The MCP endpoint at docs.cardless.com/mcp nonetheless answers tools/list
-    and tools/call with no credentials, and its query_docs_filesystem tool exposes the
-    gated corpus, including OpenAPI fragments under /openapi/api-reference/ (applications/schema.yaml,
-    authentication/get-token.yaml) and /openapi/not used/payment-plans/. API Evangelist
-    recorded the existence and shape of that contract as catalog metadata but deliberately
-    did NOT copy the gated specification or documentation bodies into this public repo.
-    Reported here as a finding for Cardless, not republished.'
+  summary: Documentation corpus is partner-login-gated in the browser but readable anonymously through
+    this MCP endpoint.
+  detail: Every HTML path on docs.cardless.com redirects to /login?redirect=... , and docs.cardless.com/sitemap.xml
+    is empty — the documentation is deliberately gated to partners. The MCP endpoint at docs.cardless.com/mcp
+    nonetheless answers tools/list and tools/call with no credentials, and its query_docs_filesystem tool
+    exposes the gated corpus, including OpenAPI fragments under /openapi/api-reference/ (applications/schema.yaml,
+    authentication/get-token.yaml) and /openapi/not used/payment-plans/. API Evangelist recorded the existence
+    and shape of that contract as catalog metadata but deliberately did NOT copy the gated specification
+    or documentation bodies into this public repo. Reported here as a finding for Cardless, not republished.
   observed: '2026-08-01'
+deployment:
+  mode: remote
+  verified: searched
+  tools: 3
+  checked: '2026-08-12'
+  source: catalog MCP census
