@@ -29,6 +29,18 @@ x-enrichment:
   pass: local-v1
 tags:
 - Company
+- Financial-Services
+- Fintech
+- Credit Cards
+- Card Issuing
+- Embedded Finance
+- Payments
+- Banking as a Service
+- Lending
+- Co-Branded Cards
+- Loyalty
+tags_raw:
+- Company
 - Financial Services
 - Fintech
 - Credit Cards
