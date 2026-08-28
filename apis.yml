@@ -13,6 +13,17 @@ description: 'Cardless, Inc. is a San Francisco fintech that operates an embedde
   Developer documentation at docs.cardless.com is gated behind a partner login, so no
   public OpenAPI, SDKs or sandbox credentials are published.'
 url: https://raw.githubusercontent.com/api-evangelist/cardless/refs/heads/main/apis.yml
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 image: https://framerusercontent.com/images/hm4RTByVdin3oyQTHY2rMm9doQ.jpg
 x-type: company
 x-source: harvest:secondary-market
