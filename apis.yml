@@ -58,7 +58,7 @@ x-enrichment:
   pass: local-v1
 tags:
 - Company
-- Financial-Services
+- Financial Services
 - Fintech
 - Credit Cards
 - Card Issuing
@@ -80,6 +80,7 @@ tags_raw:
 - Lending
 - Co-Branded Cards
 - Loyalty
+- Financial-Services
 apis:
 - aid: cardless:partner-api
   name: Cardless Partner API
