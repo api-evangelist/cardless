@@ -64,39 +64,103 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Cardless, Inc. is a San Francisco fintech operating an embedded co-branded credit card platform. Consumer brands use Cardless APIs and pre-built components to launch and run their own credit card programs natively inside their apps and websites, while Cardless handles issuing-bank relationships, card production, underwriting, fraud, KYC/AML compliance, servicing and support. The platform is network-agnostic across Visa, Mastercard and American Express.
+Cardless, Inc. is a San Francisco fintech that operates an embedded co-branded credit card platform, letting consumer brands launch and run their own credit card programs natively inside their own apps and websites. The platform pairs a partner API surface with pre-built components covering the full credit journey — application and identity verification, real-time decisioning, checkout with instant virtual cards, card management and transaction disputes — while Cardless handles issuing-bank relationships, card production, underwriting, fraud, KYC/AML compliance, servicing and support behind the scenes. It is network-agnostic across Visa, Mastercard and American Express. Named partners include Coinbase (Coinbase One Card), Bilt, Qatar Airways Privilege Club, Alibaba.com, LATAM Airlines, Avianca LifeMiles, TAP Air Portugal and Avelo Airlines. Developer documentation at docs.cardless.com is gated behind a partner login, so no public OpenAPI, SDKs or sandbox credentials are published.
 
-Named partners include Coinbase (Coinbase One Card), Bilt, Qatar Airways Privilege Club, Alibaba.com, LATAM Airlines, Avianca LifeMiles, TAP Air Portugal and Avelo Airlines.
+**Areas:** Company · Financial Services · Fintech · Credit Cards · Card Issuing · Embedded Finance · Payments · Banking as a Service · Lending · Co-Branded Cards · Loyalty
 
-- Website: https://www.cardless.com/
-- Platform: https://www.cardless.com/platform
-- Documentation: https://docs.cardless.com/ (partner login required)
-- Blog: https://www.cardless.com/blog
-- Secondary-market listing (harvest source): https://forgeglobal.com/cardless_stock/
+## Cardless on APIs.io
 
-## Access model
+Everything profiled for Cardless is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/cardless/](https://apis.io/providers/cardless/)** — or go straight to one of the APIs or properties below.
 
-Cardless is a **partner-onboarded** platform. There is no public sign-up for API credentials and no public developer surface:
+### APIs (2)
 
-- `docs.cardless.com` redirects every page to `/login`; its sitemap is empty.
-- `api.cardless.com` is live and answers every unauthenticated request with `401 {"message":"Unauthorized"}`.
-- No public OpenAPI, AsyncAPI, webhook catalog, SDK, CLI, Postman collection, sandbox credentials, security.txt, trust center, public status page or A2A Agent Card was found.
+- [Cardless Partner API](https://apis.io/apis/cardless/partner-api/) — The Cardless partner API surface used by brands to embed a co-branded credit card program: partner authentication (Basic-auth exchange of a partner-signed…
+- [Cardless Docs MCP Server](https://apis.io/apis/cardless/docs-mcp/) — A remote Model Context Protocol server published by Cardless at docs.cardless.com/mcp (Mintlify-hosted). It answers tools/list anonymously and exposes three…
 
-## What is published
+### Published properties
 
-| Artifact | What it captures |
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### MCP servers (1)
+
+Model Context Protocol servers that expose the API to agents.
+
+- [Cardless Docs](https://apis.io/servers/cardless/cardless-docs/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Cardless Authentication](https://apis.io/security/cardless/cardless-authentication/)
+- [Cardless Domain Security](https://apis.io/security/cardless/cardless-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Cardless Scopes](https://apis.io/scopes/cardless/cardless-scopes/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.cardless.com/)
+- [Documentation](https://docs.cardless.com/)
+- [Sign up](https://app.cardless.com/login)
+- [Support](https://www.cardless.com/help)
+- [Blog](https://www.cardless.com/blog)
+- [Terms of service](https://legal.cardless.com/terms_of_service/default/terms_of_service.pdf)
+- [Privacy policy](https://legal.cardless.com/privacy_policy/default/privacy_policy.pdf)
+
+## API Evangelist rating
+
+**Kin Score 20.1** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
 |---|---|
-| `mcp/` | The **Cardless Docs MCP server** at `https://docs.cardless.com/mcp` — a Mintlify-hosted MCP that answers `tools/list` anonymously with three tools, plus its verbatim tools/list response |
-| `well-known/` | RFC 8414 authorization-server and RFC 9728 protected-resource metadata (both 200), and the full negative probe index across every Cardless host |
-| `scopes/` | The single `mcp:search` scope published by the docs MCP authorization server |
-| `authentication/` | Partner Basic-auth → bearer-token exchange (account-scoped, JWT), plus the docs MCP OAuth model |
-| `conventions/` | Identifiers, error envelope, production vs staging estate, versioning findings |
-| `conformance/` | OAuth 2.0, RFC 8414, RFC 9728, PKCE, DCR, JWT, MCP 2025-06-18 — and the honest negatives |
-| `lifecycle/` | Versioning, deprecation, status page and changelog findings (all absent or gated) |
-| `components/` | The publicly described embeddable component surface (application flow, checkout, card management, disputes, rewards) |
-| `security/` | TLS/HSTS/DNSSEC/CAA/SPF/DMARC probe results |
-| `llms/` | Generated `llms.txt` for this provider |
+| Discoverability | 71.7 |
+| Contract quality | 0.0 |
+| Contract governance | 4.5 |
+| Operational transparency | 0.0 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 34.2 |
 
-## Note on the gated documentation
+**Agent readiness 22.2** — agent-aware
 
-The Cardless documentation corpus is deliberately gated behind a partner login, but the MCP endpoint on the same host answers anonymously and its read-only filesystem tool exposes the gated corpus, including the OpenAPI fragments that back the API reference. API Evangelist recorded the **existence and shape** of that contract as catalog metadata and deliberately did **not** copy the gated specification or documentation bodies into this public repository. The finding is documented in `mcp/cardless-mcp.yml` under `x-observation`.
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | documented (partial credit) |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | verified |
+| Dynamic Client Registration | yes |
+| Agentic Commerce | — |
+
+**Regulatory alignment 31.3** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/cardless/](https://apis.io/providers/cardless/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Cardless: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/cardless/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
